@@ -1,54 +1,49 @@
-const squares = document.querySelectorAll('.square')
-const mole1 = document.querySelector('.mole1')
-const timeLeft = document.getElementById('time-left')
-const score = document.getElementById('score') 
+const cursor = document.querySelector('.cursor')
+const holes = document.querySelectorAll('.hole')
+const scoreEl = document.querySelector('.score > span')
+let score = 0
+let timer = 10
 
-let result = 0
-let currentTime = 10 
-// let hitPosition
-let molePopUp 
-
-
-function randomSquare() {
-    squares.forEach(square => {
-        square.classList.remove('mole1')
-    })
-
-    let randomSquare = squares[Math.floor(Math.random() * 9)]
-    randomSquare.classList.add('mole1')
+function run() {
     
-    hitPosition = randomSquare.id
-}
+    let randomMole = holes[Math.floor(Math.random() * holes.length)]
+    // let timer1 = null
+    
+    const image = document.createElement('img')   
+    image.classList.add('mole')
+    image.src = "https://i.imgur.com/znE8VPi.png"
+    randomMole.appendChild(image)
 
-squares.forEach(square => {
-    square.addEventListener('mousedown', () => {
-        if (square.id === hitPosition) {
-            result++
-            score.textContent = result
-            // hitPosition = null
-        }
+
+    image.addEventListener('click', () => {
+        score += 10
+        scoreEl.textContent = score 
     })
+
+    // timer1 = setTimeout(() => {
+    //     randomMole.removeChild(image)
+    //     run()
+    // }, 1500)
+
+}
+run()
+
+
+setInterval(() => {
+    timer--
+    if (timer === 0) 
+}, interval);
+
+
+window.addEventListener('mousemove', (evt) => {
+    cursor.style.top = evt.pageY + 'px'
+    cursor.style.left = evt.pageX + 'px'
 })
 
-function moveMole() {
-    molePopUp = setInterval(randomSquare, 1000)
-}
+window.addEventListener('mousedown', () => {
+    cursor.classList.add('active')
+})
 
-moveMole()
-
-function countDown() {
-    currentTime--
-    timeLeft.textContent = currentTime 
-
-    if (currentTime === 0) {
-        clearInterval(countDownTimerId) 
-        clearInterval(molePopUp)
-       
-        alert('GAME OVER! Your final score is ' + result)
-    }
-}
-
-let countDownTimerId = setInterval(countDown, 1000)
-
-
-
+window.addEventListener('mouseup', () => {
+    cursor.classList.remove('active')
+})
