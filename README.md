@@ -4,7 +4,7 @@ My first computer game
 Description:
 
 1) 2 player game 
-2) 4 x 4 grid 
+2) 3 x 3 grid 
 "Begin" button 
 Meggase appears 'Player 1 get ready', time counting down on the screen (3-2-1-GO!)
 Each player has it's own logo displayed 
