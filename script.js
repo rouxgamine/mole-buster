@@ -3,12 +3,12 @@
 const cursor = document.querySelector('.cursor')
 const holes = document.querySelectorAll('.hole')
 const scoreEl = document.querySelector('.score > span')
-let startButton 
+let startButton
 let score = 0
 let timer = 10
 
 class Player {
-    constructor(name, ) {
+    constructor(name,) {
         this.name = name;
         this.score = score;
     }
@@ -17,39 +17,80 @@ class Player {
     }
 }
 
-const player1 = new Player('John', )
+const player1 = new Player('John',)
 
 const moles = ['mole1', 'mole2', 'mole3']
 
-function run() {
-    
-    let mole1 = holes[Math.floor(Math.random() * holes.length)]
-    // let timer1 = null
-    
-    const image = document.createElement('img')   
-    image.classList.add('mole')
-    image.src = "https://i.imgur.com/znE8VPi.png"
-    mole1.appendChild(image)
 
+
+const mole1Rise = function mole1Appearance() {
+
+    let mole1 = holes[Math.floor(Math.random() * holes.length)]
+    const image = document.createElement('img')
+    image.classList.add('mole')
+    image.src = 'https://i.imgur.com/D2LxOmS.png'  // red bug 
+    mole1.appendChild(image)
 
     image.addEventListener('click', () => {
         score += 10
-        scoreEl.textContent = score 
+        scoreEl.textContent = score
     })
 
-    // timer1 = setTimeout(() => {
-    //     mole1.removeChild(image)
-    //     run()
-    // }, 1500)
-
+    timer = setTimeout(() => {
+        mole1.removeChild(image)
+        mole1Appearance()
+    }, 1500)
 }
-run()
+
+mole1Rise()
 
 
-// setInterval(() => {
-//     timer--
-//     if (timer === 0) 
-// }, interval);
+const mole2Rise = function mole2Appearance() {
+
+    let mole2 = holes[Math.floor(Math.random() * holes.length)]
+
+    const image = document.createElement('img')
+    image.classList.add('mole')
+    image.src = 'https://i.imgur.com/pSkVzn2.png'  // brown bug 
+    mole2.appendChild(image)
+
+
+    image.addEventListener('click', () => {
+        score += 20
+        scoreEl.textContent = score
+    })
+
+    timer = setTimeout(() => {
+        mole2.removeChild(image)
+        mole2Appearance()
+    }, 1000)
+}
+
+mole2Rise()
+
+
+const mole3Rise = function mole3Appearance() {
+
+    let mole3 = holes[Math.floor(Math.random() * holes.length)]
+
+    const image = document.createElement('img')
+    image.classList.add('mole')
+    image.src = "https://i.imgur.com/znE8VPi.png"  // green bug
+    mole3.appendChild(image)
+
+
+    image.addEventListener('click', () => {
+        score += 30
+        scoreEl.textContent = score
+    })
+
+    timer = setTimeout(() => {
+        mole3.removeChild(image)
+        mole3Appearance()
+    }, 500)
+}
+
+mole3Rise()
 
 
 window.addEventListener('mousemove', (evt) => {
